@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Aladrocks | Grup Musical Oficial</title>
+    <!-- Google Fonts + Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000;
+            color: #f0f0f0;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scroll */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #111;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c084fc;
+            border-radius: 10px;
+        }
+
+        /* Tipografia i elements bàsics */
+        h1, h2, h3 {
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #c084fc, #ec489a);
+            border-radius: 3px;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Navbar fixa */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #c084fc, #ec489a);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: yellow;
+            letter-spacing: -0.02em;
+        }
+        .logo span {
+            font-weight: 400;
+            color: #fff;
+            background: none;
+            -webkit-background-clip: unset;
+            background-clip: unset;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            color: #f0f0f0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.2s;
+            font-size: 1rem;
+        }
+        .nav-links a:hover {
+            color: #c084fc;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: white;
+        }
+
+        /* Seccions */
+        section {
+            padding: 5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: radial-gradient(circle at 30% 10%, rgba(30, 30, 50, 0.9), #000000 90%);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-content {
+            max-width: 800px;
+            z-index: 2;
+        }
+        .hero h1 {
+            font-size: 4rem;
+            background: linear-gradient(135deg, #ffffff, #c084fc, #ec489a);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+        }
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: #ccc;
+        }
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.25s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background: linear-gradient(95deg, #c084fc, #ec489a);
+            color: white;
+            box-shadow: 0 4px 14px rgba(192, 132, 252, 0.3);
+        }
+        .btn-primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(192, 132, 252, 0.5);
+        }
+        .btn-outline {
+            border: 1.5px solid #c084fc;
+            color: #c084fc;
+            background: transparent;
+        }
+        .btn-outline:hover {
+            background: rgba(192, 132, 252, 0.1);
+            border-color: #ec489a;
+            color: #ec489a;
+        }
+
+        /* Música (llistat senzills + plataformes) */
+        .music-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+        .music-card {
+            background: rgba(20, 20, 30, 0.7);
+            backdrop-filter: blur(4px);
+            border-radius: 28px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: all 0.3s;
+        }
+        .music-card:hover {
+            border-color: #c084fc;
+            transform: translateY(-6px);
+        }
+        .music-icon {
+            font-size: 2.5rem;
+            color: #c084fc;
+            margin-bottom: 1rem;
+        }
+        .music-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+        }
+        .music-card p {
+            color: #aaa;
+            margin-bottom: 1.2rem;
+        }
+        .platform-links a {
+            color: #ddd;
+            margin-right: 1rem;
+            font-size: 1.4rem;
+            transition: 0.2s;
+            display: inline-block;
+        }
+        .platform-links a:hover {
+            color: #c084fc;
+            transform: scale(1.05);
+        }
+
+        /* Biografia */
+        .bio-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
+        }
+        .bio-text {
+            flex: 2;
+        }
+        .bio-text p {
+            margin-bottom: 1rem;
+            color: #ddd;
+        }
+        .bio-stats {
+            flex: 1;
+            background: rgba(30,30,45,0.5);
+            border-radius: 28px;
+            padding: 1.8rem;
+            text-align: center;
+            border: 1px solid #2a2a3a;
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #c084fc;
+        }
+
+        /* Concerts */
+        .concerts-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+        .concert-item {
+            background: rgba(15,15,25,0.7);
+            border-radius: 60px;
+            padding: 1rem 1.8rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(4px);
+            transition: 0.2s;
+            border-left: 4px solid #c084fc;
+        }
+        .concert-date {
+            font-weight: 700;
+            font-size: 1.1rem;
+            background: #c084fc20;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+        }
+        .concert-place {
+            font-weight: 600;
+        }
+        .concert-city {
+            color: #bbb;
+        }
+        .ticket-link {
+            color: #c084fc;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Galeria grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+        }
+        .gallery-item {
+            border-radius: 24px;
+            overflow: hidden;
+            aspect-ratio: 4 / 3;
+            background: #1a1a2a;
+            transition: 0.3s;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.4s ease;
+            display: block;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Contacte + form */
+        .contact-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+        }
+        .contact-info {
+            flex: 1;
+        }
+        .contact-info i {
+            width: 40px;
+            color: #c084fc;
+        }
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .social-icons a {
+            color: #ccc;
+            font-size: 1.6rem;
+            margin-right: 1rem;
+            transition: 0.2s;
+        }
+        .social-icons a:hover {
+            color: #c084fc;
+        }
+        .contact-form {
+            flex: 1;
+            background: #0e0e18;
+            padding: 2rem;
+            border-radius: 32px;
+            border: 1px solid #2c2c3a;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            background: #1a1a2a;
+            border: 1px solid #333;
+            border-radius: 28px;
+            color: white;
+            font-family: inherit;
+            transition: 0.2s;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #c084fc;
+        }
+        button[type="submit"] {
+            background: linear-gradient(95deg, #c084fc, #ec489a);
+            border: none;
+            width: 100%;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.85rem;
+            color: #aaa;
+        }
+
+        /* Responsive */
+        @media (max-width: 800px) {
+            .menu-toggle {
+                display: block;
+            }
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 70%;
+                height: calc(100vh - 70px);
+                background: rgba(0,0,0,0.95);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 3rem;
+                transition: 0.3s;
+                gap: 2rem;
+                border-right: 1px solid #333;
+            }
+            .nav-links.active {
+                left: 0;
+            }
+            .hero h1 {
+                font-size: 2.7rem;
+            }
+            h2 {
+                font-size: 1.9rem;
+            }
+            .concert-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.6rem;
+                border-radius: 30px;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo">ALAD<span>ROCKS</span></div>
+        <div class="menu-toggle" id="mobile-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#inici">Inici</a></li>
+            <li><a href="#musica">Música</a></li>
+            <li><a href="#bio">Biografia</a></li>
+            <li><a href="#concerts">Concerts</a></li>
+            <li><a href="#galeria">Galeria</a></li>
+            <li><a href="#contacte">Contacte</a></li>
+        </ul>
+    </div>
+</nav>
+
+<main>
+    <!-- Hero -->
+    <section id="inici" class="hero">
+        <div class="hero-content">
+            <img src="logo.png" alt="icon" style="height: 600px; vertical-align: middle; margin-right: 10px;">
+            <div class="btn-group">
+                <a href="#musica" class="btn btn-primary"><i class="fas fa-headphones"></i> Escolta ara</a>
+                <a href="#concerts" class="btn btn-outline"><i class="fas fa-calendar-alt"></i> Gira 2026</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Secció Música -->
+    <section id="musica">
+        <div class="container">
+            <h2>Música</h2>
+            <p style="margin-bottom: 2rem;">Descobreix els nostres últims llançaments i senzills. Disponibles a totes les plataformes.</p>
+            <div class="music-grid">
+                <div class="music-card">
+                    <div class="music-icon"><i class="fas fa-microphone-alt"></i></div>
+                    <h3>Som aquí per fer història</h3>
+                    <p>Senzill principal 2025 · Lançament 25 Febrer 2025</p>
+                    <div class="platform-links">
+                        <a href="https://open.spotify.com/album/0mnjLPCIppTcVuSe8gpNjK" aria-label="Spotify"><i class="fab fa-spotify"></i></a>
+                        <a href="https://music.apple.com/es/album/som-aqu%C3%AD-per-fer-hist%C3%B2ria-single/1498454787?l=ca" aria-label="Apple Music"><i class="fab fa-apple"></i></a>
+                        <a href="https://www.youtube.com/watch?v=LW6OgYfnFPI" aria-label="YouTube Music"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="music-card">
+                    <div class="music-icon"><i class="fas fa-microphone-alt"></i></div>
+                    <h3>Ballaré descalç</h3>
+                    <p>2 cançons · Llançament 18 Abril 2025</p>
+                    <div class="platform-links">
+                        <a href="https://open.spotify.com/album/34R51RMRqsZ31kQkKK7W7o"><i class="fab fa-spotify"></i></a>
+                        <a href="https://music.apple.com/es/album/ballar%C3%A9-descal%C3%A7-single/1807971667?l=ca"><i class="fab fa-apple"></i></a>
+                        <a href="https://www.youtube.com/watch?v=39RQ8Rccnp4"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="music-card">
+                    <div class="music-icon"><i class="fas fa-microphone-alt"></i></div>
+                    <h3>Àlbum: ''CAMINAR''</h3>
+                    <p>12 cançons · Llançament 20 Maig 2022</p>
+                    <div class="platform-links">
+                        <a href="https://open.spotify.com/album/6piaopuSxwfV59wfgCmpdi?si=ZiMNxE3aQ3WkRP5XRWBERQ"><i class="fab fa-spotify"></i></a>
+                        <a href="https://music.apple.com/es/album/caminar/1622818765?i=1622819185&l=ca"><i class="fab fa-apple"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Biografia -->
+    <section id="bio">
+        <div class="container">
+            <h2>Biografia</h2>
+            <div class="bio-content">
+                <div class="bio-text">
+                    <p><strong>Aladrocks</strong> neix a Caldes de Montbui el 2019. La banda està formada per Marc (veu i guitarra), Jem (veus i baix), Mandru (bateria i percussió), Joan F (teclats) i Joan S (Veus i guitarra). Des del seu primer LP "Caminar" han conquistat festivals com el Sónar, Primavera Sound i el Cruïlla.</p>
+                    <p>El seu so distintiu barreja melodies hipnòtiques, lletres introspectives i una posada en escena visual única. El 2024 van guanyar el premi "Revelació" dels Premis ARC.</p>
+                    <p>Més de 2 milions d’oïdes acumulades a plataformes i una legió de seguidors fidels acompanyen cada nova proposta. Benvinguts al viatge sònic d’Aladrocks.</p>
+                </div>
+                <div class="bio-stats">
+                    <div class="stat-number">2.3M+</div>
+                    <div>streams anuals</div>
+                    <div class="stat-number" style="margin-top: 1rem;">85+</div>
+                    <div>concerts internacionals</div>
+                    <div class="stat-number" style="margin-top: 1rem;">12k</div>
+                    <div>seguidors IG</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Concerts / dates -->
+    <section id="concerts">
+        <div class="container">
+            <h2>Pròximes dates</h2>
+            <div class="concerts-list">
+                <div class="concert-item">
+                    <span class="concert-date"><i class="far fa-calendar-alt"></i> 25 JULIOL 2026</span>
+                    <span class="concert-place">Bugarai</span>
+                    <span class="concert-city">Caldes de Montbui</span>
+                    <a href="#" class="ticket-link">Entrades <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="concert-item">
+                    <span class="concert-date"><i class="far fa-calendar-alt"></i> 8 AGOST 2026</span>
+                    <span class="concert-place">Palau Sant Jordi</span>
+                    <span class="concert-city">Barcelona</span>
+                    <a href="#" class="ticket-link">Entrades <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="concert-item">
+                    <span class="concert-date"><i class="far fa-calendar-alt"></i> 15 AGOST 2026</span>
+                    <span class="concert-place">Palau de la Música</span>
+                    <span class="concert-city">Barcelona</span>
+                    <a href="#" class="ticket-link">Entrades <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="concert-item">
+                    <span class="concert-date"><i class="far fa-calendar-alt"></i> 29 AGOST 2026</span>
+                    <span class="concert-place">Shea Stadium</span>
+                    <span class="concert-city">New York</span>
+                    <a href="#" class="ticket-link">Entrades <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeria d'imatges -->
+    <section id="galeria">
+        <div class="container">
+            <h2>Galeria</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="IMG-20241015-WA0012.jpg" alt="">
+                </div>
+                <div class="gallery-item">
+                    <img src="IMG-20241015-WA0000.jpg" alt="">
+                </div>
+                <div class="gallery-item">
+                    <img src="IMG-20240618-WA0012.jpg" alt="">
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacte i xarxes -->
+    <section id="contacte">
+        <div class="container">
+            <h2>Contacte</h2>
+            <div class="contact-flex">
+                <div class="contact-info">
+                    <div class="info-item"><i class="fas fa-envelope"></i> <span>aladrocks@gmail.com</span></div>
+                    <div class="info-item"><i class="fas fa-phone-alt"></i> <span>+34 123 45 67 89</span></div>
+                    <div class="info-item"><i class="fas fa-map-marker-alt"></i> <span>Caldes de Montbui, Catalunya</span></div>
+                    <div class="social-icons" style="margin-top: 2rem;">
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" aria-label="Youtube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="demo-form">
+                        <div class="form-group">
+                            <input type="text" placeholder="Nom complet" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Correu electrònic" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea rows="3" placeholder="Missatge per a la banda..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar missatge</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>© 2026 Aladrocks · Tots els drets reservats · Disseny Aladrocks</p>
+</footer>
+
+<script>
+    // Menú responsive hamburguesa
+    const menuToggle = document.getElementById('mobile-menu');
+    const navLinks = document.getElementById('nav-links');
+
+    if (menuToggle) {
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    }
+
+    // Tancar menú després de clicar un enllaç (mòbil)
+    const links = document.querySelectorAll('.nav-links a');
+    links.forEach(link => {
+        link.addEventListener('click', () => {
+            if (navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+            }
+        });
+    });
+
+    // Formulari demo: alerta sense enviar dades reals
+    const form = document.getElementById('demo-form');
+    if (form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert("📨 Gràcies per contactar! Aquesta és una demo. En un web real el missatge s'enviaria al correu del grup.");
+            form.reset();
+        });
+    }
+
+    // Scroll suau (ja ho fa el CSS scroll-behavior però assegurem compatibilitat)
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if (targetId === "#" || targetId === "") return;
+            const target = document.querySelector(targetId);
+            if (target) {
+                e.preventDefault();
+                const offset = 70; // altura navbar fixa
+                const elementPosition = target.getBoundingClientRect().top + window.scrollY;
+                window.scrollTo({ top: elementPosition - offset, behavior: 'smooth' });
+            }
+        });
+    });
+
+    // Small effect: navbar background canvi en scroll (millora visual)
+    window.addEventListener('scroll', () => {
+        const nav = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+            nav.style.background = 'rgba(0, 0, 0, 0.95)';
+            nav.style.backdropFilter = 'blur(16px)';
+        } else {
+            nav.style.background = 'rgba(0, 0, 0, 0.85)';
+        }
+    });
+</script>
+</body>
+</html>
